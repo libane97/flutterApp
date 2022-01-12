@@ -17,21 +17,50 @@ class HomePage extends StatelessWidget {
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(title: Text("MyAppMakeFluttertest")),
-      body: ListView.builder(
-        itemCount: euroListe.length,
-        itemBuilder: (context, index){
-          return ListTile(
-             title: Text(euroListe[index]),
-             leading: CircleAvatar(backgroundColor: Colors.yellow.shade700),
-          );
-        }
-        
+      body: CustomCheckBox(
         ),
        floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.red,
         onPressed: () {},
         child: Icon(Icons.add, color: Colors.white ,)
       ),
+    );
+  }
+}
+
+class CustomCheckBox extends StatefulWidget {
+  const CustomCheckBox({ Key? key }) : super(key: key);
+
+  @override
+  _CustomCheckBoxState createState() => _CustomCheckBoxState();
+}
+
+class _CustomCheckBoxState extends State<CustomCheckBox> {
+  var isCheck;
+  dynamic msg;
+   @override
+  void initState() {
+    super.initState();
+    isCheck = false;
+    msg = "Non Active";
+  }
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+         Checkbox(value: isCheck, onChanged: (bool? value) {
+           setState(() {
+            isCheck = value;
+            if (isCheck) {
+                msg = "Active ";
+            }else{
+               msg = "Non Active";
+            }
+             
+           });
+         }),
+         Text(msg, style: TextStyle(fontSize: 35),)
+      ],
     );
   }
 }
